@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#0A2E36">
-<title>Tecnología de la Información y la Comunicación · Recepción Hotelera</title>
+<title>Formatos, tipos de archivo y nomenclatura</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -25,7 +25,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 #deck{height:100%;position:relative;overflow:hidden}
 .rail{position:absolute;top:0;left:0;right:0;height:4px;background:rgba(255,255,255,.18);z-index:9}
 .rail i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--mostaza),var(--espuma));transition:width .5s cubic-bezier(.22,1,.36,1)}
-.slide{position:absolute;inset:0;overflow:auto;display:none;padding:clamp(26px,5vh,64px) clamp(20px,6vw,88px) 104px}
+.slide{position:absolute;inset:0;overflow:auto;display:none;padding:clamp(22px,4vh,52px) clamp(20px,6vw,88px) 132px}
 .slide.on{display:block}
 .slide.light{background:var(--cal);color:var(--tinta)}
 .slide.dark{background:radial-gradient(120% 100% at 80% 0%,#134651 0%,var(--noche) 60%);color:var(--cal)}
@@ -164,8 +164,77 @@ p{font-size:clamp(15px,1.75vw,21px);line-height:1.55;margin:0 0 14px;max-width:5
  .tag{margin-left:auto}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.stagger>*,.arbol span{opacity:1}}
+/* componentes de la clase de formatos */
+.cols2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:14px}
+.exts{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0}
+.ext{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:clamp(14px,1.8vw,19px);font-weight:700;background:var(--cal);border:2px solid rgba(14,34,38,.15);border-radius:12px;padding:12px 16px;transition:transform .18s,border-color .18s,background .18s}
+.dark .ext{background:rgba(251,246,238,.08);border-color:rgba(143,211,208,.3);color:var(--cal)}
+.ext:hover{transform:translateY(-3px)}
+.ext.sel{border-color:var(--mostaza);background:#FFF6E6;box-shadow:0 0 0 4px rgba(232,163,61,.25)}
+.respuesta{font-weight:700;color:var(--mar);min-height:1.6em;font-size:clamp(14px,1.7vw,20px)}
+.dark .respuesta{color:var(--mostaza)}
+.demo{background:var(--cal);border:1px solid rgba(14,34,38,.12);border-radius:16px;padding:18px;box-shadow:0 10px 24px rgba(10,46,54,.06)}
+.dark .demo{background:rgba(251,246,238,.06);border-color:rgba(143,211,208,.22)}
+.hoja{background:#fff;border:1px solid rgba(14,34,38,.15);border-radius:10px;padding:16px;font-size:clamp(14px,1.6vw,18px);line-height:1.7;transition:background .4s,color .4s,box-shadow .4s}
+.hoja.pdf{background:#233B41;color:var(--cal);box-shadow:inset 0 0 0 3px var(--mostaza)}
+.editable{border-bottom:2px dashed var(--buganvilia);padding:0 4px;font-weight:700;cursor:text}
+.hoja.pdf .editable{border-bottom:0;cursor:not-allowed;opacity:.9}
+.bt.mini{margin:0 0 0 8px;padding:7px 13px;font-size:13px;border-radius:9px;vertical-align:middle}
+.bt{margin-top:12px;background:var(--mar);color:#fff;border-radius:12px;padding:12px 20px;font-weight:800;font-size:clamp(14px,1.6vw,17px);align-self:flex-start;max-width:max-content}
+.bt:hover{filter:brightness(1.08)}
+.crudo{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:clamp(11px,1.4vw,15px);background:#0E3A43;color:var(--espuma);border-radius:12px;padding:14px;overflow:auto;margin:0}
+.tablaDemo{display:none;margin-top:12px;overflow:auto}
+.tablaDemo.on{display:block;animation:rise .5s ease both}
+.tablaDemo table{border-collapse:collapse;width:100%;font-size:clamp(12px,1.5vw,16px);background:#fff}
+.tablaDemo th{background:#134651;color:var(--cal);text-align:left;padding:8px 10px;font-weight:700}
+.tablaDemo td{border-bottom:1px solid rgba(14,34,38,.12);padding:8px 10px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 14px}
+.chip{background:var(--cal);border:2px solid rgba(14,34,38,.15);border-radius:12px;padding:12px 15px;font-weight:600;font-size:clamp(13px,1.6vw,17px);cursor:grab;text-align:left}
+.dark .chip{background:rgba(251,246,238,.08);border-color:rgba(143,211,208,.3);color:var(--cal)}
+.chip.sel{border-color:var(--mostaza);box-shadow:0 0 0 4px rgba(232,163,61,.25)}
+.chip.bien{border-color:#1F9D5B;background:#E9F7F0;opacity:.75}
+.chip.mal{border-color:#C63A5E;background:#FBE9EC;animation:tembla .3s}
+@keyframes tembla{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.cajas{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,45%),1fr));gap:12px}
+.cajas.grid5{grid-template-columns:repeat(auto-fit,minmax(min(140px,45%),1fr))}
+.caja2{border:2px dashed rgba(14,34,38,.25);border-radius:14px;padding:16px;text-align:center;font-family:ui-monospace,Menlo,Consolas,monospace;min-height:84px;transition:background .2s,border-color .2s}
+.dark .caja2{border-color:rgba(143,211,208,.35)}
+.caja2.lista{border-color:var(--mostaza);background:rgba(232,163,61,.12)}
+.caja2 b{display:block;font-size:clamp(14px,1.7vw,19px)}
+.caja2 .cnt{font-family:var(--ff-b);font-size:12px;color:var(--humo)}
+.tabla{display:grid;gap:4px;margin-top:6px}
+.tr{display:grid;grid-template-columns:1.4fr .5fr 1fr;gap:12px;padding:11px 14px;background:var(--cal);border-radius:10px;font-size:clamp(13px,1.6vw,18px)}
+.tr.th{background:var(--noche);color:var(--cal);font-weight:700}
+.tr b{font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--buganvilia)}
+.anatomia{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:10px 0;font-family:ui-monospace,Menlo,Consolas,monospace}
+.parte{background:var(--cal);border:2px solid rgba(14,34,38,.15);border-radius:12px;padding:12px 14px;text-align:center}
+.parte span{display:block;font-size:clamp(15px,2vw,22px);font-weight:700}
+.parte small{font-family:var(--ff-b);color:var(--humo);font-size:12px;font-weight:700}
+.parte.sel{border-color:var(--mostaza);background:#FFF6E6}
+.sep{font-size:clamp(18px,2.4vw,26px);font-weight:800;color:var(--humo)}
+.lista{list-style:none;padding:0;margin:8px 0 0;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:clamp(11px,1.4vw,15px)}
+.lista li{background:rgba(251,246,238,.08);border-radius:8px;padding:7px 10px;margin-bottom:6px;transition:transform .4s}
+.entrada{width:100%;max-width:640px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:clamp(14px,1.7vw,18px);padding:14px;border-radius:12px;border:2px solid rgba(14,34,38,.2);background:#fff;margin:12px 0}
+.entrada:focus{outline:none;border-color:var(--mar)}
+.checklist{display:grid;gap:8px;max-width:640px}
+.checklist div{padding:10px 14px;border-radius:10px;background:rgba(14,34,38,.06);font-size:clamp(13px,1.6vw,17px);position:relative;padding-left:40px}
+.checklist div::before{content:"○";position:absolute;left:14px;font-weight:800;color:var(--humo)}
+.checklist div.ok{background:#E9F7F0;color:#14655A}
+.checklist div.ok::before{content:"✓";color:#1F9D5B}
 
+.casos{display:grid;gap:8px;margin:8px 0 12px}
+.caso{position:relative;display:block;text-align:left;background:var(--cal);border:1px solid rgba(14,34,38,.12);border-left:6px solid var(--mar);border-radius:0 12px 12px 0;padding:10px 54px 10px 16px;transition:transform .18s,border-color .18s}
+.dark .caso{background:rgba(251,246,238,.07);color:var(--cal);border-color:rgba(143,211,208,.22);border-left-color:var(--espuma)}
+.caso:hover{transform:translateX(3px)}
+.caso .q{display:block;font-weight:700;font-size:clamp(14px,1.7vw,19px)}
+.caso .a{display:none;font-size:clamp(13px,1.5vw,17px);color:var(--humo);margin-top:2px}
+.caso .a b{font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--buganvilia);font-size:1.05em}
+.caso::after{content:"Tocar";position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:12px;font-weight:800;color:var(--mar);letter-spacing:.04em}
+.caso.open{border-left-color:var(--mostaza)}
+.caso.open .a{display:block;animation:rise .3s ease both}
+.caso.open::after{content:"✓";color:var(--mostaza);font-size:18px}
 .fab{top:auto;bottom:16px;right:16px;padding:14px 20px;font-size:16px;border-radius:14px;background:var(--mostaza);color:var(--noche);box-shadow:0 10px 26px rgba(10,46,54,.3)}
+.fab:hover{filter:brightness(1.06)}
 #mando .ahora b{font-size:24px}
 #mando .ahora small{font-size:13px}
 #mando button{padding:22px;font-size:19px}
@@ -187,23 +256,21 @@ p{font-size:clamp(15px,1.75vw,21px);line-height:1.55;margin:0 0 14px;max-width:5
 <body>
 <div id="deck">
 <div class="rail"><i id="prog"></i></div>
-
 <section class="slide dark">
  <div class="inner hero">
   <div>
-   <p class="eyebrow anim">Universidad de San Buenaventura · Cartagena de Indias</p>
-   <h1 class="anim">Tecnología de la Información y la Comunicación</h1>
-   <p class="lead anim">Técnico Laboral en Recepción Hotelera</p>
-   <div class="datos anim"><span>26 de septiembre al 8 de octubre</span><span>48 horas</span><span>Andrés Jiménez Tuñón</span></div>
-   <p class="small anim" style="margin-top:22px">Avanza con la flecha derecha o desliza.</p>
+   <p class="eyebrow anim">Módulo TIC · Sesión 2</p>
+   <h1 class="anim">Formatos, tipos de archivo y nomenclatura</h1>
+   <p class="lead anim">Cómo escoger el archivo correcto y ponerle un nombre que sirva</p>
+   <p class="small anim" style="margin-top:20px">Hoy vas a tocar, arrastrar y equivocarte. Así se aprende.</p>
   </div>
   <div class="llavero anim">
    <svg viewBox="0 0 120 220" aria-hidden="true">
     <line x1="60" y1="0" x2="60" y2="52" stroke="#8FD3D0" stroke-width="3"/>
     <circle cx="60" cy="58" r="10" fill="none" stroke="#E8A33D" stroke-width="4"/>
     <rect x="22" y="70" width="76" height="104" rx="12" fill="#E8A33D"/>
-    <text x="60" y="122" text-anchor="middle" font-family="Bricolage Grotesque,serif" font-size="34" font-weight="800" fill="#0A2E36">101</text>
-    <text x="60" y="150" text-anchor="middle" font-family="Manrope,sans-serif" font-size="13" font-weight="700" fill="#0A2E36">recepción</text>
+    <text x="60" y="118" text-anchor="middle" font-family="Bricolage Grotesque,serif" font-size="26" font-weight="800" fill="#0A2E36">.pdf</text>
+    <text x="60" y="146" text-anchor="middle" font-family="Manrope,sans-serif" font-size="12" font-weight="700" fill="#0A2E36">archivos</text>
    </svg>
   </div>
  </div>
@@ -211,179 +278,301 @@ p{font-size:clamp(15px,1.75vw,21px);line-height:1.55;margin:0 0 14px;max-width:5
 
 <section class="slide light">
  <div class="inner">
-  <p class="eyebrow anim">Lunes, tu primer turno</p>
-  <h2 class="anim">Llega un huésped, el jefe pide la lista de llegadas y el contador quiere los pagos del día.</h2>
-  <p class="anim">¿Con qué resuelves las tres cosas antes del mediodía?</p>
-  <div class="opciones anim" id="op">
-   <button data-ok="0">Con buena memoria</button>
-   <button data-ok="0">Preguntándole a un compañero</button>
-   <button data-ok="1">Con las herramientas del hotel</button>
+  <p class="eyebrow anim">Antes de empezar</p>
+  <h2 class="anim">La señora Pérez pide su confirmación de reserva por correo.</h2>
+  <p class="anim">Tienes el documento listo en el computador. ¿Cómo se lo mandas?</p>
+  <div class="opciones anim" id="op1">
+   <button data-ok="0">Como archivo de Word</button>
+   <button data-ok="1">Como PDF</button>
+   <button data-ok="0">Como foto de la pantalla</button>
   </div>
-  <div class="sello" id="sello">De eso se trata este módulo</div>
+  <div class="sello" id="s1">En PDF: nadie le puede cambiar el precio ni las fechas</div>
  </div>
 </section>
 
 <section class="slide sand">
  <div class="inner">
-  <p class="eyebrow anim">La competencia del módulo</p>
-  <h2 class="anim">Operar herramientas informáticas y digitales según protocolos y manuales técnicos</h2>
+  <p class="eyebrow anim">Lo básico</p>
+  <h2 class="anim">Todo archivo tiene tres cosas</h2>
   <div class="board stagger">
-   <button class="hook"><h3>Qué significa</h3><p>Usar bien los programas del trabajo: siguiendo el procedimiento, no inventando cada vez.</p><div class="pista">Tócalo</div><div class="reveal">Lo mismo, hecho igual, por cualquiera del equipo.</div></button>
-   <button class="hook"><h3>Cómo se ve en recepción</h3><p>Que un compañero continúe tu turno sin tener que llamarte.</p><div class="pista">Tócalo</div><div class="reveal">Tu archivo se encuentra, tu registro se entiende, tu caja cuadra.</div></button>
-   <button class="hook"><h3>Por qué pesa en la hoja de vida</h3><p>En Cartagena ya casi nadie contrata recepción sin manejo digital.</p><div class="pista">Tócalo</div><div class="reveal">Es la diferencia entre entrar de una o quedar en la lista de espera.</div></button>
+   <button class="hook"><h3>Nombre</h3><p>Lo que tú decides. Es lo único que controlas.</p><div class="pista">Tócalo</div><div class="reveal">Un mal nombre hace perder 10 minutos buscando.</div></button>
+   <button class="hook"><h3>Extensión</h3><p>Las letras después del punto: .docx, .pdf, .xlsx</p><div class="pista">Tócalo</div><div class="reveal">Le dice al computador con qué programa abrirlo.</div></button>
+   <button class="hook"><h3>Peso</h3><p>Cuánto ocupa: KB, MB, GB</p><div class="pista">Tócalo</div><div class="reveal">Los correos suelen aguantar hasta 25 MB.</div></button>
   </div>
  </div>
 </section>
 
 <section class="slide light">
  <div class="inner">
-  <p class="eyebrow anim">Unidad de aprendizaje</p>
-  <h2 class="anim">Diseñar la estructura de archivos digitales</h2>
-  <div class="arbol anim" style="margin-bottom:18px">
-   <span>📁 <b>Hotel 2026</b></span>
-   <span>&nbsp;&nbsp;📁 <b>10 Octubre</b></span>
-   <span>&nbsp;&nbsp;&nbsp;&nbsp;📁 Caja · 2026-10-03_cierre-caja_noche.xlsx</span>
-   <span>&nbsp;&nbsp;&nbsp;&nbsp;📁 Registro · 2026-10-03_registro-huespedes.xlsx</span>
-   <span>&nbsp;&nbsp;&nbsp;&nbsp;📁 Reservas · 2026-10-03_confirmacion_perez.pdf</span>
+  <p class="eyebrow anim">La extensión</p>
+  <h2 class="anim">La placa del archivo. Toca una y mira quién la abre.</h2>
+  <div class="exts stagger" id="exts">
+   <button class="ext" data-p="Word · documentos de texto">.docx</button>
+   <button class="ext" data-p="Cualquier lector o navegador · documento cerrado">.pdf</button>
+   <button class="ext" data-p="Excel · hojas de cálculo">.xlsx</button>
+   <button class="ext" data-p="Excel o el bloc de notas · datos separados por comas">.csv</button>
+   <button class="ext" data-p="Visor de fotos · imagen con muchos colores">.jpg</button>
+   <button class="ext" data-p="Visor de fotos · imagen con fondo transparente">.png</button>
+   <button class="ext" data-p="PowerPoint · presentaciones">.pptx</button>
+   <button class="ext" data-p="Cualquier computador · carpeta comprimida">.zip</button>
   </div>
-  <div class="duo anim">
+  <p class="respuesta" id="r-ext">Toca una extensión…</p>
+  <p class="small anim">Si borras la extensión sin querer, el computador ya no sabe con qué abrir el archivo.</p>
+ </div>
+</section>
+
+<section class="slide dark">
+ <div class="inner">
+  <p class="eyebrow anim">Documentos</p>
+  <h2 class="anim">DOCX: para escribir y corregir</h2>
+  <div class="cols2 stagger">
+   <div class="hook"><h3>Sirve para</h3><p>Cartas, actas, informes, plantillas que se llenan cada vez</p></div>
+   <div class="hook"><h3>Ventaja</h3><p>Se edita. Cambias un dato y listo</p></div>
+   <div class="hook"><h3>Riesgo</h3><p>Cualquiera que lo reciba también lo puede editar</p></div>
+   <div class="hook"><h3>En recepción</h3><p>La plantilla de la carta de confirmación vive en DOCX</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="slide light">
+ <div class="inner">
+  <p class="eyebrow anim">Documentos</p>
+  <h2 class="anim">PDF: para mandar y archivar</h2>
+  <p class="anim">Toca el botón y mira la diferencia.</p>
+  <div class="demo anim">
+   <div class="hoja" id="hojaDemo"><b>Hotel San Buenaventura</b><br>Confirmación de reserva<br>Huésped: Laura Pérez<br>Total: <span id="precio" contenteditable="true" class="editable">$540.000</span></div>
+   <button class="bt" id="btPdf">Convertir a PDF</button>
+   <p class="respuesta" id="r-pdf">El documento está en Word: toca el precio y cámbialo. Se deja.</p>
+  </div>
+ </div>
+</section>
+
+<section class="slide sand">
+ <div class="inner">
+  <p class="eyebrow anim">Caso por caso</p>
+  <h2 class="anim">¿Word o PDF? Decídelo con el grupo</h2>
+  <p class="small anim">Pregunta primero, toca después. La respuesta aparece cuando tú quieras. <button class="bt mini" data-todo=".casos">Mostrar todas</button></p>
+  <div class="casos stagger">
+   <button class="caso"><span class="q">La plantilla que llenas cada semana</span><span class="a"><b>.docx</b> porque la vas a editar una y otra vez</span></button>
+   <button class="caso"><span class="q">La confirmación que le mandas al huésped</span><span class="a"><b>.pdf</b> porque nadie le puede cambiar el precio</span></button>
+   <button class="caso"><span class="q">La factura para el contador</span><span class="a"><b>.pdf</b> porque es un documento definitivo</span></button>
+   <button class="caso"><span class="q">El acta de la reunión que sigues editando</span><span class="a"><b>.docx</b> porque todavía está viva</span></button>
+   <button class="caso"><span class="q">El reglamento que se firma</span><span class="a"><b>.pdf</b> porque debe quedar igual para todos</span></button>
+  </div>
+</div>
+</section>
+
+<section class="slide dark">
+ <div class="inner">
+  <p class="eyebrow anim">Hojas de cálculo</p>
+  <h2 class="anim">XLSX: cuando hay números y filas</h2>
+  <div class="cols2 stagger">
+   <div class="hook"><h3>Sirve para</h3><p>Cuadre de caja, lista de llegadas, control de consumos</p></div>
+   <div class="hook"><h3>Superpoder</h3><p>Fórmulas, filtros y gráficas: calcula solo</p></div>
+   <div class="hook"><h3>Guarda formato</h3><p>Colores, fórmulas y varias hojas en un archivo</p></div>
+   <div class="hook"><h3>En recepción</h3><p>El cierre del turno siempre termina en Excel</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="slide light">
+ <div class="inner">
+  <p class="eyebrow anim">Datos crudos</p>
+  <h2 class="anim">CSV: así salen los datos de un sistema</h2>
+  <p class="anim">Es texto plano separado por comas. Toca el botón y míralo convertido.</p>
+  <div class="demo anim">
+   <pre class="crudo" id="crudo">codigo,huesped,habitacion,noches,total
+R1042,Laura Perez,101,3,540000
+R1043,James Walker,201,1,250000
+R1044,Diego Salgado,302,5,1900000</pre>
+   <div class="tablaDemo" id="tablaDemo"></div>
+   <button class="bt" id="btCsv">Abrir en Excel</button>
+  </div>
+  <p class="small anim">Sin colores ni fórmulas: solo los datos. Por eso todos los sistemas lo entienden.</p>
+ </div>
+</section>
+
+<section class="slide sand">
+ <div class="inner">
+  <p class="eyebrow anim">Imágenes</p>
+  <h2 class="anim">JPG y PNG no son lo mismo</h2>
+  <div class="cols2 stagger">
+   <div class="hook"><h3>JPG</h3><p>Fotos. Pesa poco, pierde algo de calidad cada vez que se guarda. No tiene fondo transparente.</p></div>
+   <div class="hook"><h3>PNG</h3><p>Logos y capturas. Más pesado, nítido y permite fondo transparente.</p></div>
+   <div class="hook"><h3>En recepción</h3><p>Foto del documento del huésped: JPG. Logo del hotel para un correo: PNG.</p></div>
+   <div class="hook"><h3>Ojo</h3><p>Una foto de la pantalla no reemplaza el archivo original. No se puede filtrar ni sumar.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="slide light">
+ <div class="inner">
+  <p class="eyebrow anim">Caso por caso</p>
+  <h2 class="anim">Cada situación con su formato</h2>
+  <p class="small anim">Que ellos propongan el formato y tú destapas la respuesta. <button class="bt mini" data-todo="#casos2">Mostrar todas</button></p>
+  <div class="casos stagger" id="casos2">
+   <button class="caso"><span class="q">Cuadre de caja con fórmulas</span><span class="a"><b>.xlsx</b> porque necesitas que sume solo</span></button>
+   <button class="caso"><span class="q">Exportar las reservas del sistema</span><span class="a"><b>.csv</b> porque es el formato que entienden todos los programas</span></button>
+   <button class="caso"><span class="q">Factura para enviar por correo</span><span class="a"><b>.pdf</b> porque va cerrada</span></button>
+   <button class="caso"><span class="q">Foto del documento del huésped</span><span class="a"><b>.jpg</b> porque pesa poco y es una foto</span></button>
+   <button class="caso"><span class="q">Logo del hotel para la firma del correo</span><span class="a"><b>.png</b> porque conserva el fondo transparente</span></button>
+   <button class="caso"><span class="q">Lista de llegadas para filtrar por canal</span><span class="a"><b>.xlsx</b> porque vas a usar filtros</span></button>
+  </div>
+</div>
+</section>
+
+<section class="slide dark">
+ <div class="inner">
+  <p class="eyebrow anim">El peso</p>
+  <h2 class="anim">KB, MB y GB en cristiano</h2>
+  <div class="board stagger">
+   <div class="hook"><h3>1 KB</h3><p>Un párrafo de texto</p></div>
+   <div class="hook"><h3>1 MB</h3><p>Una foto del celular, más o menos</p></div>
+   <div class="hook"><h3>25 MB</h3><p>El tope de casi todos los correos</p></div>
+   <div class="hook"><h3>1 GB</h3><p>Mil MB. Un video largo</p></div>
+  </div>
+  <p class="anim" style="margin-top:18px">Si el correo rebota, casi siempre es porque mandaste fotos sin comprimir.</p>
+ </div>
+</section>
+
+<section class="slide light">
+ <div class="inner">
+  <p class="eyebrow anim">Y entonces</p>
+  <h2 class="anim">Tabla de decisión para la recepción</h2>
+  <div class="tabla anim">
+   <div class="tr th"><span>Necesitas…</span><span>Usa</span><span>Por qué</span></div>
+   <div class="tr"><span>Que no se lo puedan cambiar</span><span><b>.pdf</b></span><span>Queda cerrado</span></div>
+   <div class="tr"><span>Seguir editándolo</span><span><b>.docx</b></span><span>Se abre y se corrige</span></div>
+   <div class="tr"><span>Sumar, filtrar, hacer cuentas</span><span><b>.xlsx</b></span><span>Tiene fórmulas</span></div>
+   <div class="tr"><span>Sacar datos de un sistema</span><span><b>.csv</b></span><span>Todos lo leen</span></div>
+   <div class="tr"><span>Guardar la foto de un documento</span><span><b>.jpg</b></span><span>Pesa poco</span></div>
+   <div class="tr"><span>Un logo con fondo transparente</span><span><b>.png</b></span><span>Conserva el fondo</span></div>
+  </div>
+ </div>
+</section>
+
+<section class="slide sand">
+ <div class="inner">
+  <p class="eyebrow anim">Segunda parte</p>
+  <h2 class="anim">Ahora el nombre. Aquí se pierde más tiempo que en todo lo anterior.</h2>
+  <p class="lead anim">Un archivo bien guardado pero mal nombrado es un archivo perdido.</p>
+  <div class="duo anim" style="margin-top:14px">
    <div class="mal">cierre FINAL ok (2).xlsx</div>
    <div class="bien">2026-10-03_cierre-caja_noche.xlsx</div>
   </div>
-  <p class="small anim" style="margin-top:14px">Regla del curso: si otro no lo encuentra en diez segundos, está mal guardado.</p>
+ </div>
+</section>
+
+<section class="slide light">
+ <div class="inner">
+  <p class="eyebrow anim">Anatomía</p>
+  <h2 class="anim">Las tres partes de un buen nombre</h2>
+  <div class="anatomia anim">
+   <button class="parte" data-p="Año, mes y día. Siempre con cuatro dígitos el año y dos el mes y el día."><span>2026-10-03</span><small>Fecha</small></button>
+   <span class="sep">_</span>
+   <button class="parte" data-p="De qué se trata, en una o dos palabras con guion."><span>cierre-caja</span><small>Tema</small></button>
+   <span class="sep">_</span>
+   <button class="parte" data-p="El dato que lo distingue de los demás: el turno, el huésped, la habitación."><span>noche</span><small>Detalle</small></button>
+   <span class="sep">.</span>
+   <button class="parte" data-p="La extensión la pone el programa al guardar. No la escribas tú."><span>xlsx</span><small>Extensión</small></button>
+  </div>
+  <p class="respuesta" id="r-ana">Toca cada parte.</p>
  </div>
 </section>
 
 <section class="slide dark">
  <div class="inner">
-  <p class="eyebrow anim">Los saberes</p>
-  <h2 class="anim">Cinco llaves que vas a recibir</h2>
-  <div class="board stagger">
-   <div class="hook"><h3>Herramientas</h3><p>Cuál sirve para qué y cuál no</p></div>
-   <div class="hook"><h3>Funciones avanzadas</h3><p>Lo que de verdad ahorra tiempo en un turno</p></div>
-   <div class="hook"><h3>Instalación y configuración</h3><p>Dejar el equipo listo para trabajar</p></div>
-   <div class="hook"><h3>Formatos</h3><p>DOCX, PDF, XLSX, CSV, JPG</p></div>
-   <div class="hook"><h3>Programación básica</h3><p>Fórmulas y una primera macro</p></div>
+  <p class="eyebrow anim">La pregunta del millón</p>
+  <h2 class="anim">¿Por qué la fecha va de primero?</h2>
+  <p class="anim">Mira qué pasa cuando el computador ordena la carpeta por nombre.</p>
+  <div class="cols2 anim">
+   <div><p class="small">Nombres sin estándar</p><ul class="lista" id="listaMal"></ul></div>
+   <div><p class="small">Con la fecha al inicio</p><ul class="lista" id="listaBien"></ul></div>
   </div>
+  <button class="bt" id="btOrden">Ordenar por nombre</button>
  </div>
 </section>
 
 <section class="slide light">
  <div class="inner">
-  <p class="eyebrow anim">Los procedimientos</p>
-  <h2 class="anim">Lo que vas a saber hacer. Marca lo que ya manejas hoy.</h2>
-  <div class="checks stagger" id="checks">
-   <button class="check"><span class="caja">✓</span><span>Configurar y personalizar Word y Excel</span></button>
-   <button class="check"><span class="caja">✓</span><span>Organizar carpetas y nombrar archivos con un estándar</span></button>
-   <button class="check"><span class="caja">✓</span><span>Respaldar y trabajar en la nube sin perder nada</span></button>
-   <button class="check"><span class="caja">✓</span><span>Diseñar plantillas para no repetir trabajo</span></button>
-   <button class="check"><span class="caja">✓</span><span>Pasar datos de un sistema a Excel y de Excel a Word</span></button>
-   <button class="check"><span class="caja">✓</span><span>Trabajar con atajos de teclado</span></button>
-  </div>
-  <p class="small anim" style="margin-top:14px">Lo que quede sin marcar hoy es exactamente lo que vamos a trabajar.</p>
- </div>
-</section>
-
-<section class="slide sand">
- <div class="inner">
-  <p class="eyebrow anim">Las actitudes</p>
-  <h2 class="anim">Lo que se nota en un turno, aunque no esté en el examen</h2>
+  <p class="eyebrow anim">Prohibido</p>
+  <h2 class="anim">Cinco cosas que dañan un nombre</h2>
   <div class="board stagger">
-   <div class="hook"><h3>Orden</h3><p>Cada cosa en su carpeta, todos los días</p></div>
-   <div class="hook"><h3>Curiosidad</h3><p>Probar antes de rendirse</p></div>
-   <div class="hook"><h3>Método</h3><p>Mismo proceso, mismo resultado</p></div>
-   <div class="hook"><h3>Compañerismo</h3><p>Enseñar lo que ya aprendiste</p></div>
-  </div>
- </div>
-</section>
-
-<section class="slide light">
- <div class="inner">
-  <p class="eyebrow anim">Ruta del módulo</p>
-  <h2 class="anim">Ocho encuentros en dos semanas</h2>
-  <div class="agenda stagger" id="agenda">
-   <button class="fila"><span class="cuando">Sáb 26 sep</span><span><span class="que">Herramientas, formatos y organización</span><span class="det">Taller diagnóstico y práctica en sala de sistemas</span></span><span class="modo" style="grid-column:2">Presencial, 8:00 a 2:00</span></button>
-   <button class="fila v"><span class="cuando">Mar 29 sep</span><span><span class="que">Estructura de carpetas y nombres</span><span class="det">Cada uno arma su estructura en la nube</span></span><span class="modo" style="grid-column:2">Virtual, 7:00 a 9:00 p. m.</span></button>
-   <button class="fila v"><span class="cuando">Mié 30 sep</span><span><span class="que">Respaldo y datos del huésped</span><span class="det">Buenas prácticas y protección de datos</span></span><span class="modo" style="grid-column:2">Virtual, 7:00 a 9:00 p. m.</span></button>
-   <button class="fila v"><span class="cuando">Jue 1 oct</span><span><span class="que">Plantillas</span><span class="det">Tarjeta de registro y carta de confirmación</span></span><span class="modo" style="grid-column:2">Virtual, 7:00 a 9:00 p. m.</span></button>
-   <button class="fila"><span class="cuando">Sáb 3 oct</span><span><span class="que">Excel y atajos</span><span class="det">Filtros, fórmulas y simulación de un turno completo</span></span><span class="modo" style="grid-column:2">Presencial, 8:00 a 2:00</span></button>
-   <button class="fila v"><span class="cuando">Mar 6 oct</span><span><span class="que">Integrar herramientas</span><span class="det">De Excel a Word y formularios en línea</span></span><span class="modo" style="grid-column:2">Virtual, 7:00 a 9:00 p. m.</span></button>
-   <button class="fila v"><span class="cuando">Mié 7 oct</span><span><span class="que">Automatizar</span><span class="det">Primera macro y reporte que se arma solo</span></span><span class="modo" style="grid-column:2">Virtual, 7:00 a 9:00 p. m.</span></button>
-   <button class="fila v"><span class="cuando">Jue 8 oct</span><span><span class="que">Evaluación y cierre</span><span class="det">Entrega de evidencias y sustentación corta</span></span><span class="modo" style="grid-column:2">Virtual, 7:00 a 9:00 p. m.</span></button>
-  </div>
-  <p class="small anim" style="margin-top:12px">Toca una fecha para ver qué haremos ese día.</p>
- </div>
-</section>
-
-<section class="slide dark">
- <div class="inner">
-  <p class="eyebrow anim">Cómo trabajamos</p>
-  <h2 class="anim">Poco discurso. Mucho turno simulado.</h2>
-  <div class="board stagger">
-   <div class="hook"><h3>Problemas primero</h3><p>Cada tema entra por una situación del hotel, no por la definición</p></div>
-   <div class="hook"><h3>Juego de roles</h3><p>Te toca atender, resolver y responder por lo que hiciste</p></div>
-   <div class="hook"><h3>Simulación</h3><p>Practicamos en un entorno parecido al del trabajo real</p></div>
-   <div class="hook"><h3>Parejas</h3><p>Quien va adelante acompaña a quien va empezando</p></div>
-  </div>
-  <div class="cifras anim" style="margin-top:26px">
-   <div class="cifra"><b>24</b><span>horas de teoría</span></div>
-   <div class="cifra"><b>24</b><span>horas de práctica</span></div>
-   <div class="cifra"><b>0</b><span>exámenes sorpresa</span></div>
-  </div>
- </div>
-</section>
-
-<section class="slide light">
- <div class="inner">
-  <p class="eyebrow anim">Evaluación</p>
-  <h2 class="anim">Se evalúa lo que haces, no lo que memorizas</h2>
-  <div class="board stagger">
-   <div class="hook"><h3>Tus productos</h3><p>Los archivos y carpetas que entregas</p></div>
-   <div class="hook"><h3>Observación en clase</h3><p>Cómo trabajas en la sala y en el juego de roles</p></div>
-   <div class="hook"><h3>Sustentación corta</h3><p>Explicar con tus palabras lo que hiciste</p></div>
-   <div class="hook"><h3>Cuestionarios</h3><p>Preguntas con situaciones de recepción</p></div>
-   <div class="hook"><h3>Auto y coevaluación</h3><p>Rúbricas contigo y con tus compañeros</p></div>
+   <div class="hook"><h3>Tildes y ñ</h3><p>habitación → habitacion</p></div>
+   <div class="hook"><h3>Espacios</h3><p>Usa guion o guion bajo</p></div>
+   <div class="hook"><h3>Paréntesis y símbolos</h3><p>Nada de (2), #, %, /</p></div>
+   <div class="hook"><h3>“final”, “ok”, “ya”</h3><p>Siempre aparece otro más final</p></div>
+   <div class="hook"><h3>Mayúsculas regadas</h3><p>Todo en minúscula y listo</p></div>
   </div>
  </div>
 </section>
 
 <section class="slide sand">
  <div class="inner">
-  <p class="eyebrow anim">Tus evidencias</p>
-  <h2 class="anim">Lo que debes tener el 8 de octubre</h2>
+  <p class="eyebrow anim">En vivo</p>
+  <h2 class="anim">Repáralo con ellos, en vivo</h2>
+  <p class="anim">Cierre de caja del turno de la mañana, del 3 de octubre de 2026, en Excel.</p>
+  <div class="mal anim">Cierre Caja MAÑANA final (2).xlsx</div>
+  <input class="entrada anim" id="fix" placeholder="Escribe aquí el nombre corregido" autocapitalize="none" spellcheck="false">
+  <div class="checklist" id="chk">
+   <div data-k="fecha">Empieza con 2026-10-03</div>
+   <div data-k="tema">Dice de qué se trata (cierre y caja)</div>
+   <div data-k="detalle">Incluye el turno (manana)</div>
+   <div data-k="limpio">Sin tildes, espacios ni paréntesis</div>
+   <div data-k="ext">Termina en .xlsx</div>
+  </div>
+ </div>
+</section>
+
+<section class="slide dark">
+ <div class="inner">
+  <p class="eyebrow anim">Versiones</p>
+  <h2 class="anim">¿Y si el archivo cambia todos los días?</h2>
+  <div class="cols2 stagger">
+   <div class="hook"><h3>No hagas esto</h3><p>informe.xlsx · informe2.xlsx · informe final.xlsx · informe final ok.xlsx</p></div>
+   <div class="hook"><h3>Haz esto</h3><p>La fecha es la versión: 2026-10-01_informe.xlsx, 2026-10-02_informe.xlsx</p></div>
+   <div class="hook"><h3>Si de verdad hay versiones</h3><p>2026-10-03_contrato_v2.docx. Número al final, nunca “final”.</p></div>
+   <div class="hook"><h3>En la nube</h3><p>Drive y OneDrive guardan el historial: puedes volver atrás sin duplicar</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="slide light">
+ <div class="inner">
+  <p class="eyebrow anim">Dónde va</p>
+  <h2 class="anim">Carpetas: de lo general a lo específico</h2>
+  <div class="arbol anim">
+   <span>📁 <b>Hotel 2026</b></span>
+   <span>&nbsp;&nbsp;📁 <b>10-Octubre</b></span>
+   <span>&nbsp;&nbsp;&nbsp;&nbsp;📁 Caja · 2026-10-03_cierre-caja_noche.xlsx</span>
+   <span>&nbsp;&nbsp;&nbsp;&nbsp;📁 Registro · 2026-10-03_registro-huespedes.xlsx</span>
+   <span>&nbsp;&nbsp;&nbsp;&nbsp;📁 Reservas · 2026-10-03_confirmacion_perez.pdf</span>
+   <span>&nbsp;&nbsp;&nbsp;&nbsp;📁 Mantenimiento · 2026-10-03_reporte-danos_301.docx</span>
+  </div>
+  <p class="small anim" style="margin-top:14px">Máximo tres o cuatro niveles. Más profundo y nadie lo encuentra.</p>
+ </div>
+</section>
+
+<section class="slide sand">
+ <div class="inner">
+  <p class="eyebrow anim">Antes de guardar</p>
+  <h2 class="anim">Las cuatro preguntas de siempre</h2>
   <div class="checks stagger">
-   <div class="check"><span class="caja">✓</span><span>Tu carpeta digital organizada con el estándar del curso</span></div>
-   <div class="check"><span class="caja">✓</span><span>Tus plantillas: tarjeta de registro y carta de confirmación</span></div>
-   <div class="check"><span class="caja">✓</span><span>Los archivos de cada ejercicio, exportados y bien nombrados</span></div>
-   <div class="check"><span class="caja">✓</span><span>El resumen del texto del plan lector</span></div>
-  </div>
-  <p class="small anim" style="margin-top:16px">Se va armando clase a clase. Al final solo se entrega.</p>
- </div>
-</section>
-
-<section class="slide light">
- <div class="inner">
-  <p class="eyebrow anim">Nuestros acuerdos</p>
-  <h2 class="anim">Cuatro reglas para estas dos semanas</h2>
-  <div class="board stagger">
-   <button class="hook"><h3>Nadie se queda atrás</h3><p>Tócalo para ver cómo se aplica</p><div class="pista">Tócalo</div><div class="reveal">Si a uno le cuesta un tema, lo vemos todos.</div></button>
-   <button class="hook"><h3>Preguntar no da pena</h3><p>Tócalo para ver cómo se aplica</p><div class="pista">Tócalo</div><div class="reveal">La pregunta “boba” la tienen otros tres callados.</div></button>
-   <button class="hook"><h3>Se entrega a tiempo</h3><p>Tócalo para ver cómo se aplica</p><div class="pista">Tócalo</div><div class="reveal">Lo tarde se recibe, pero primero hablamos del porqué.</div></button>
-   <button class="hook"><h3>El celular es herramienta</h3><p>Tócalo para ver cómo se aplica</p><div class="pista">Tócalo</div><div class="reveal">Se usa cuando el ejercicio lo pide; el resto, boca abajo.</div></button>
+   <div class="check"><span class="caja">1</span><span>¿Quién lo va a abrir y con qué programa?</span></div>
+   <div class="check"><span class="caja">2</span><span>¿Necesita editarse o va cerrado?</span></div>
+   <div class="check"><span class="caja">3</span><span>¿En qué carpeta lo va a buscar mi compañero?</span></div>
+   <div class="check"><span class="caja">4</span><span>¿El nombre se entiende sin abrirlo?</span></div>
   </div>
  </div>
 </section>
 
 <section class="slide dark">
  <div class="inner">
-  <p class="eyebrow anim">El 8 de octubre</p>
-  <h2 class="anim" style="max-width:24ch">Vas a poder sentarte en cualquier recepción y entender el sistema que te pongan al frente</h2>
-  <div class="checks stagger" style="max-width:52ch">
-   <div class="check"><span class="caja">✓</span><span>Dejar tu turno documentado, sin que nadie te llame después</span></div>
-   <div class="check"><span class="caja">✓</span><span>Mandar el archivo correcto, en el formato correcto</span></div>
-   <div class="check"><span class="caja">✓</span><span>Resolver en Excel lo que hoy resuelves a mano</span></div>
-  </div>
-  <p class="lead anim" style="margin-top:26px;color:var(--mostaza)">Arrancamos ahora.</p>
+  <p class="eyebrow anim">Cierre</p>
+  <h2 class="anim">La regla de los diez segundos</h2>
+  <p class="lead anim">Si un compañero no encuentra tu archivo en diez segundos, está mal guardado. Punto.</p>
+  <p class="anim" style="margin-top:18px">Ahora viene la práctica: <b>La Carpeta Caótica</b>. Doce archivos regados, cuatro carpetas y tres nombres por reparar.</p>
+  <p class="small anim">Entra al mismo enlace de siempre con tu usuario.</p>
  </div>
 </section>
 
@@ -393,7 +582,7 @@ p{font-size:clamp(15px,1.75vw,21px);line-height:1.55;margin:0 0 14px;max-width:5
  <button data-go="-1" aria-label="Diapositiva anterior">Atrás</button>
  <button data-go="1" aria-label="Siguiente diapositiva">Siguiente</button>
  <button id="fs" aria-label="Pantalla completa">Pantalla completa</button>
- <span class="tag" id="tag">1 / 13</span>
+ <span class="tag" id="tag">1 / 1</span>
 </div>
 </div>
 <div id="mando">
@@ -404,6 +593,7 @@ p{font-size:clamp(15px,1.75vw,21px);line-height:1.55;margin:0 0 14px;max-width:5
  <div class="cont"><span id="m-cont">—</span> · <button style="background:none;padding:6px;color:#9FC4C6;font-size:13px;text-decoration:underline" id="m-salir">Salir del control</button></div>
 </div>
 <script>
+
 (function(){
  const slides=[...document.querySelectorAll('.slide')];let i=0;
  function go(n){i=Math.max(0,Math.min(slides.length-1,n));
@@ -430,6 +620,75 @@ p{font-size:clamp(15px,1.75vw,21px);line-height:1.55;margin:0 0 14px;max-width:5
  document.getElementById('fs').onclick=()=>{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen().catch(()=>{});};
  go(0);
  window.deckGo=go;
+})();
+
+
+
+/* ---------- Interacciones de la clase ---------- */
+(function(){
+ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+ // pregunta inicial
+ document.addEventListener('click',e=>{
+  const o=e.target.closest('#op1 button');
+  if(o){const box=$('#op1');box.classList.add('resuelta');[...box.children].forEach(b=>b.classList.toggle('buena',b.dataset.ok==='1'));$('#s1').classList.add('puesto');}
+  const x=e.target.closest('.ext');
+  if(x){$$('.ext').forEach(b=>b.classList.toggle('sel',b===x));$('#r-ext').textContent='La abre: '+x.dataset.p;}
+  const c=e.target.closest('.caso');if(c)c.classList.toggle('open');
+  const td=e.target.closest('[data-todo]');if(td){const abrir=[...document.querySelectorAll(td.dataset.todo+' .caso')].some(x=>!x.classList.contains('open'));
+   document.querySelectorAll(td.dataset.todo+' .caso').forEach(x=>x.classList.toggle('open',abrir));td.textContent=abrir?'Ocultar todas':'Mostrar todas';}
+  const pa=e.target.closest('.parte');
+  if(pa){$$('.parte').forEach(b=>b.classList.toggle('sel',b===pa));$('#r-ana').textContent=pa.dataset.p;}
+ });
+ // Word vs PDF
+ const bt=$('#btPdf');
+ if(bt)bt.onclick=()=>{const h=$('#hojaDemo'),p=$('#r-pdf');
+  if(h.classList.contains('pdf')){h.classList.remove('pdf');$('#precio').setAttribute('contenteditable','true');bt.textContent='Convertir a PDF';p.textContent='El documento está en Word: toca el precio y cámbialo. Se deja.';}
+  else{h.classList.add('pdf');$('#precio').setAttribute('contenteditable','false');bt.textContent='Volver a Word';p.textContent='Ahora es PDF: intenta cambiar el precio. No se deja. Por eso se manda así.';}};
+ // CSV a tabla
+ const bc=$('#btCsv');
+ if(bc)bc.onclick=()=>{const t=$('#tablaDemo');
+  if(t.classList.contains('on')){t.classList.remove('on');bc.textContent='Abrir en Excel';return;}
+  const filas=$('#crudo').textContent.trim().split('\n').map(l=>l.split(','));
+  t.innerHTML='<table><thead><tr>'+filas[0].map(c=>'<th>'+c+'</th>').join('')+'</tr></thead><tbody>'+filas.slice(1).map(f=>'<tr>'+f.map(c=>'<td>'+c+'</td>').join('')+'</tr>').join('')+'</tbody></table>';
+  t.classList.add('on');bc.textContent='Ver el archivo crudo';};
+ // juegos de clasificar
+ function juego(idF,idC,idR){
+  const cont=document.getElementById(idF),cajas=document.getElementById(idC),res=document.getElementById(idR);
+  if(!cont)return;let sel=null,ok=0;const total=cont.children.length;
+  const pinta=()=>{res.textContent=ok?('Van '+ok+' de '+total):'';};
+  const soltar=(chip,g)=>{
+   if(!chip||chip.classList.contains('bien'))return;
+   if(chip.dataset.g===g){chip.classList.add('bien');chip.classList.remove('mal','sel');ok++;
+    const c=[...cajas.children].find(x=>x.dataset.g===g);const n=c.querySelector('.cnt');n.textContent=(+(n.textContent.match(/\d+/)||[0])[0]+1)+' correctos';
+    pinta();if(ok===total)res.textContent='¡Completo! '+total+' de '+total;}
+   else{chip.classList.add('mal');setTimeout(()=>chip.classList.remove('mal'),400);res.textContent='Esa no va ahí. Piensa para qué sirve el archivo.';}
+   sel=null;[...cont.children].forEach(c=>c.classList.remove('sel'));
+   [...cajas.children].forEach(c=>c.classList.remove('lista'));};
+  cont.addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c||c.classList.contains('bien'))return;
+   sel=(sel===c)?null:c;[...cont.children].forEach(x=>x.classList.toggle('sel',x===sel));
+   [...cajas.children].forEach(x=>x.classList.toggle('lista',!!sel));});
+  cajas.addEventListener('click',e=>{const c=e.target.closest('.caja2');if(c&&sel)soltar(sel,c.dataset.g);});
+  cont.addEventListener('dragstart',e=>{const c=e.target.closest('.chip');if(c){sel=c;e.dataTransfer.setData('text/plain','x');}});
+  [...cajas.children].forEach(c=>{c.addEventListener('dragover',e=>{e.preventDefault();c.classList.add('lista');});
+   c.addEventListener('dragleave',()=>c.classList.remove('lista'));
+   c.addEventListener('drop',e=>{e.preventDefault();soltar(sel,c.dataset.g);});});
+ }
+ juego('fichas1','cajas1','r1');juego('fichas2','cajas2','r2');
+ // ordenar por nombre
+ const MAL=['cierre FINAL ok.xlsx','cierre lunes.xlsx','CIERRE martes (2).xlsx','cierre.xlsx'];
+ const BIEN=['2026-10-01_cierre-caja.xlsx','2026-10-02_cierre-caja.xlsx','2026-10-03_cierre-caja.xlsx','2026-10-04_cierre-caja.xlsx'];
+ const pinta=(id,arr)=>{const u=document.getElementById(id);if(u)u.innerHTML=arr.map(t=>'<li>'+t+'</li>').join('');};
+ const rev=a=>a.slice().sort(()=>Math.random()-.5);
+ pinta('listaMal',rev(MAL));pinta('listaBien',rev(BIEN));
+ const bo=$('#btOrden');
+ if(bo)bo.onclick=()=>{pinta('listaMal',MAL.slice().sort((a,b)=>a.localeCompare(b)));pinta('listaBien',BIEN.slice().sort((a,b)=>a.localeCompare(b)));
+  bo.textContent='Ordenado: a la izquierda quedó un reguero; a la derecha, en orden cronológico';bo.disabled=true;bo.style.opacity=.75;};
+ // reparar nombre
+ const fix=$('#fix');
+ if(fix)fix.addEventListener('input',()=>{const v=fix.value.trim(),n=v.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  const r={fecha:n.startsWith('2026-10-03'),tema:n.includes('cierre')&&n.includes('caja'),detalle:n.includes('manana'),
+   limpio:/^[a-z0-9._-]+$/.test(n)&&!/[()\s]/.test(v),ext:/\.xlsx$/.test(n)};
+  $$('#chk div').forEach(d=>d.classList.toggle('ok',!!r[d.dataset.k]));});
 })();
 
 /* ---------- Control remoto por Firebase ---------- */
@@ -502,6 +761,7 @@ p{font-size:clamp(15px,1.75vw,21px);line-height:1.55;margin:0 0 14px;max-width:5
   const mv=ev=>mover(ev),up=()=>{pad.classList.remove('activo');enviar({pointer:false});document.removeEventListener('mousemove',mv);document.removeEventListener('mouseup',up);};
   document.addEventListener('mousemove',mv);document.addEventListener('mouseup',up);});
 })();
+
 
 </script>
 </body>
