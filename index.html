@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#0A2E36">
+<title>Tecnología de la Información y la Comunicación · Recepción Hotelera</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noche:#0A2E36;--mar:#12878F;--espuma:#8FD3D0;--cal:#FBF6EE;--arena:#F0E6D6;
+  --buganvilia:#C63A5E;--mostaza:#E8A33D;--tinta:#0E2226;--humo:#6B8085;
+  --ff-d:"Bricolage Grotesque",Georgia,serif;--ff-b:Manrope,system-ui,sans-serif;
+}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%;margin:0;overflow:hidden;background:var(--noche)}
+body{font-family:var(--ff-b);color:var(--tinta);-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+:focus-visible{outline:3px solid var(--mostaza);outline-offset:3px}
+
+#deck{height:100%;position:relative;overflow:hidden}
+.rail{position:absolute;top:0;left:0;right:0;height:4px;background:rgba(255,255,255,.18);z-index:9}
+.rail i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--mostaza),var(--espuma));transition:width .5s cubic-bezier(.22,1,.36,1)}
+.slide{position:absolute;inset:0;overflow:auto;display:none;padding:clamp(26px,5vh,64px) clamp(20px,6vw,88px) 104px}
+.slide.on{display:block}
+.slide.light{background:var(--cal);color:var(--tinta)}
+.slide.dark{background:radial-gradient(120% 100% at 80% 0%,#134651 0%,var(--noche) 60%);color:var(--cal)}
+.slide.sand{background:linear-gradient(180deg,var(--arena),#F7EFE2);color:var(--tinta)}
+.inner{max-width:1180px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;justify-content:center}
+
+/* tipografía */
+.eyebrow{font-family:var(--ff-b);font-weight:700;font-size:clamp(12px,1.4vw,15px);color:var(--buganvilia);margin:0 0 10px;letter-spacing:.01em}
+.dark .eyebrow{color:var(--mostaza)}
+h1{font-family:var(--ff-d);font-weight:800;font-size:clamp(34px,7vw,86px);line-height:.96;letter-spacing:-.03em;margin:0 0 18px}
+h2{font-family:var(--ff-d);font-weight:800;font-size:clamp(26px,4.6vw,54px);line-height:1.02;letter-spacing:-.025em;margin:0 0 18px;max-width:20ch}
+h3{font-family:var(--ff-d);font-weight:600;font-size:clamp(17px,2.1vw,24px);margin:0 0 4px;letter-spacing:-.01em}
+p{font-size:clamp(15px,1.75vw,21px);line-height:1.55;margin:0 0 14px;max-width:58ch}
+.lead{font-size:clamp(17px,2.2vw,27px);line-height:1.4;color:var(--humo);max-width:34ch}
+.dark .lead{color:var(--espuma)}
+.small{font-size:clamp(13px,1.4vw,16px);color:var(--humo)}
+.dark .small{color:#9FC4C6}
+
+/* entrada orquestada */
+.slide.on .anim{animation:rise .62s cubic-bezier(.22,1,.36,1) both}
+.slide.on .anim:nth-child(1){animation-delay:.02s}.slide.on .anim:nth-child(2){animation-delay:.1s}
+.slide.on .anim:nth-child(3){animation-delay:.18s}.slide.on .anim:nth-child(4){animation-delay:.26s}
+.slide.on .anim:nth-child(5){animation-delay:.34s}.slide.on .anim:nth-child(6){animation-delay:.42s}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.stagger>*{opacity:0}
+.slide.on .stagger>*{animation:rise .55s cubic-bezier(.22,1,.36,1) both}
+.slide.on .stagger>*:nth-child(1){animation-delay:.18s}.slide.on .stagger>*:nth-child(2){animation-delay:.26s}
+.slide.on .stagger>*:nth-child(3){animation-delay:.34s}.slide.on .stagger>*:nth-child(4){animation-delay:.42s}
+.slide.on .stagger>*:nth-child(5){animation-delay:.5s}.slide.on .stagger>*:nth-child(6){animation-delay:.58s}
+.slide.on .stagger>*:nth-child(7){animation-delay:.66s}.slide.on .stagger>*:nth-child(8){animation-delay:.74s}
+
+/* portada */
+.hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(220px,.65fr);gap:clamp(20px,4vw,56px);align-items:center}
+.hero h1{max-width:14ch}
+.datos{display:flex;flex-wrap:wrap;gap:8px 28px;font-weight:600;color:var(--espuma);font-size:clamp(13px,1.5vw,18px);margin-top:6px}
+.llavero{position:relative;height:clamp(180px,32vh,340px);display:grid;place-items:start center}
+.llavero svg{width:clamp(120px,16vw,190px);transform-origin:50% 6%;animation:swing 5.5s ease-in-out infinite}
+@keyframes swing{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+
+/* tablero de llaves */
+.board{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:14px}
+.hook{position:relative;text-align:left;background:var(--cal);border:1px solid rgba(14,34,38,.12);border-radius:4px 4px 16px 16px;padding:18px 20px 20px;box-shadow:0 10px 24px rgba(10,46,54,.07);transition:transform .25s cubic-bezier(.22,1,.36,1),box-shadow .25s}
+.dark .hook{background:rgba(251,246,238,.06);border-color:rgba(143,211,208,.22);color:var(--cal);box-shadow:none}
+.hook::before{content:"";position:absolute;top:-9px;left:24px;width:14px;height:14px;border-radius:50%;background:var(--mostaza);box-shadow:0 0 0 3px var(--cal)}
+.dark .hook::before{box-shadow:0 0 0 3px var(--noche)}
+.hook:hover,.hook:focus-visible{transform:translateY(-4px) rotate(-.6deg);box-shadow:0 16px 30px rgba(10,46,54,.12)}
+.hook p{font-size:clamp(13px,1.5vw,17px);color:var(--humo);margin:0;max-width:34ch}
+.dark .hook p{color:#A9CBCC}
+.hook .reveal{display:none;margin-top:10px;font-weight:700;color:var(--buganvilia)}
+.dark .hook .reveal{color:var(--mostaza)}
+.hook.open .reveal{display:block;animation:rise .35s ease both}
+.hook.open .pista{display:none}
+.pista{margin-top:12px;font-size:13px;font-weight:700;color:var(--mar)}
+.dark .pista{color:var(--espuma)}
+
+/* cronograma */
+.agenda{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr))}
+.fila{display:grid;grid-template-columns:118px 1fr;gap:4px 16px;align-items:center;padding:12px 16px;background:var(--cal);border-left:6px solid var(--mar);border-radius:0 12px 12px 0;text-align:left;width:100%}
+.fila.v{border-left-color:var(--buganvilia);background:#FDF7F4}
+.fila .cuando{font-family:var(--ff-d);font-weight:600;font-size:clamp(15px,1.7vw,20px)}
+.fila .que{font-weight:700;font-size:clamp(14px,1.6vw,19px)}
+.fila .det{display:block;font-weight:500;color:var(--humo);font-size:clamp(12px,1.4vw,15px);max-height:0;overflow:hidden;transition:max-height .3s ease}
+.fila.abierta .det{max-height:60px}
+.modo{font-size:12px;font-weight:700;color:var(--mar)}
+.fila.v .modo{color:var(--buganvilia)}
+
+/* árbol y comparación */
+.arbol{font-family:ui-monospace,Menlo,Consolas,monospace;background:#0E3A43;color:var(--espuma);border-radius:14px;padding:clamp(16px,2.5vw,26px);font-size:clamp(12px,1.5vw,17px);line-height:1.85;box-shadow:inset 0 0 0 1px rgba(143,211,208,.18)}
+.arbol b{color:var(--mostaza);font-weight:700}
+.slide.on .arbol span{animation:linea .4s ease both}
+.arbol span{display:block;opacity:0}
+.slide.on .arbol span:nth-child(1){animation-delay:.3s}.slide.on .arbol span:nth-child(2){animation-delay:.45s}
+.slide.on .arbol span:nth-child(3){animation-delay:.6s}.slide.on .arbol span:nth-child(4){animation-delay:.75s}
+.slide.on .arbol span:nth-child(5){animation-delay:.9s}.slide.on .arbol span:nth-child(6){animation-delay:1.05s}
+@keyframes linea{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+.duo{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:14px;margin-top:6px}
+.mal,.bien{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:clamp(12px,1.5vw,16px);padding:14px 16px;border-radius:12px}
+.mal{background:#FBE9EC;border:1px solid #EFC3CC;text-decoration:line-through;color:#93304A}
+.bien{background:#E7F5F1;border:1px solid #B8DFD5;color:#14655A}
+
+/* lista con chulos */
+.checks{display:grid;gap:10px;max-width:60ch}
+.check{display:flex;gap:14px;align-items:flex-start;text-align:left;padding:12px 16px;border-radius:12px;background:rgba(18,135,143,.07);font-size:clamp(14px,1.7vw,19px);width:100%}
+.dark .check{background:rgba(251,246,238,.07)}
+.caja{flex:none;width:26px;height:26px;border-radius:8px;border:2px solid var(--mar);display:grid;place-items:center;color:transparent;font-weight:800;transition:background .2s,color .2s,transform .2s}
+.check.hecho .caja{background:var(--mar);color:#fff;transform:rotate(-6deg) scale(1.05)}
+.dark .caja{border-color:var(--espuma)}
+.dark .check.hecho .caja{background:var(--espuma);color:var(--noche)}
+
+/* pregunta inicial */
+.opciones{display:flex;gap:12px;flex-wrap:wrap;margin:6px 0 4px}
+.opciones button{background:var(--cal);border:2px solid rgba(14,34,38,.15);border-radius:14px;padding:14px 20px;font-weight:700;font-size:clamp(14px,1.6vw,19px);transition:transform .2s,border-color .2s}
+.dark .opciones button{background:rgba(251,246,238,.08);border-color:rgba(143,211,208,.3);color:var(--cal)}
+.opciones button:hover{transform:translateY(-3px)}
+.opciones.resuelta button{opacity:.45}
+.opciones.resuelta button.buena{opacity:1;border-color:var(--mostaza);box-shadow:0 0 0 4px rgba(232,163,61,.25)}
+.sello{display:none;margin-top:18px;border:3px solid var(--buganvilia);color:var(--buganvilia);border-radius:14px;padding:14px 20px;font-family:var(--ff-d);font-weight:800;font-size:clamp(17px,2.4vw,28px);max-width:26ch;transform:rotate(-2deg)}
+.sello.puesto{display:block;animation:sellar .45s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes sellar{from{opacity:0;transform:rotate(-2deg) scale(1.5)}}
+
+/* cifras */
+.cifras{display:flex;gap:clamp(20px,5vw,64px);flex-wrap:wrap;margin-top:10px}
+.cifra b{display:block;font-family:var(--ff-d);font-weight:800;font-size:clamp(34px,6vw,72px);line-height:1;color:var(--mostaza)}
+.cifra span{font-size:clamp(13px,1.4vw,16px);color:var(--espuma)}
+
+/* navegación */
+.nav{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:12px;padding:14px clamp(18px,5vw,48px) calc(14px + env(safe-area-inset-bottom,0px));z-index:8}
+.nav button{padding:10px 16px;border-radius:12px;font-weight:700;background:rgba(251,246,238,.92);color:var(--tinta);box-shadow:0 6px 18px rgba(10,46,54,.14)}
+.slide.dark~.nav button{background:rgba(251,246,238,.92)}
+.nav button:hover{background:#fff}
+.tag{margin-left:auto;font-family:var(--ff-d);font-weight:600;background:var(--mostaza);color:var(--noche);padding:8px 14px;border-radius:99px;font-size:14px}
+
+/* control remoto */
+.fab{position:absolute;top:14px;right:14px;z-index:20;background:rgba(251,246,238,.92);border-radius:12px;padding:8px 13px;font-weight:700;font-size:13px;box-shadow:0 6px 18px rgba(10,46,54,.18)}
+.dotp{position:fixed;width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#FF6B6B,#C1121F);box-shadow:0 0 18px 6px rgba(214,51,108,.45);pointer-events:none;z-index:30;transform:translate(-50%,-50%);display:none}
+.dotp.on{display:block}
+#mando{position:fixed;inset:0;background:var(--noche);color:var(--cal);z-index:50;display:none;flex-direction:column;padding:16px calc(16px + env(safe-area-inset-left,0px)) calc(16px + env(safe-area-inset-bottom,0px))}
+#mando.on{display:flex}
+#mando .ahora{background:rgba(251,246,238,.08);border-radius:16px;padding:14px 16px;margin-bottom:12px}
+#mando .ahora small{color:var(--espuma);font-weight:700;font-size:12px}
+#mando .ahora b{display:block;font-family:var(--ff-d);font-size:20px;line-height:1.2;margin-top:4px}
+#mando .pad{flex:1;border-radius:18px;border:2px dashed rgba(143,211,208,.4);display:grid;place-items:center;color:#9FC4C6;font-weight:700;text-align:center;padding:16px;touch-action:none;margin-bottom:12px}
+#mando .pad.activo{border-style:solid;border-color:var(--mostaza);color:var(--mostaza)}
+#mando .fila2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#mando button{background:var(--mar);color:#fff;border-radius:14px;padding:18px;font-weight:800;font-size:17px}
+#mando button.sec{background:rgba(251,246,238,.12);color:var(--cal)}
+#mando .cont{text-align:center;color:#9FC4C6;font-size:13px;margin-top:10px}
+@media (max-width:680px){
+ .hero{grid-template-columns:1fr}.llavero{display:none}
+ .fila{grid-template-columns:1fr;gap:4px}
+ .fila .modo{grid-column:1!important}
+ .slide{padding-bottom:120px}
+ .nav{flex-wrap:wrap;gap:8px;background:linear-gradient(transparent,rgba(10,46,54,.25));padding-bottom:calc(10px + env(safe-area-inset-bottom,0px))}
+ .nav button{padding:9px 13px;font-size:14px}
+ #fs{display:none}
+ .tag{margin-left:auto}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.stagger>*,.arbol span{opacity:1}}
+
+.fab{top:auto;bottom:16px;right:16px;padding:14px 20px;font-size:16px;border-radius:14px;background:var(--mostaza);color:var(--noche);box-shadow:0 10px 26px rgba(10,46,54,.3)}
+#mando .ahora b{font-size:24px}
+#mando .ahora small{font-size:13px}
+#mando button{padding:22px;font-size:19px}
+#mando .pad{font-size:16px}
+
+.panel{position:fixed;inset:0;background:rgba(10,46,54,.82);display:grid;place-items:center;padding:16px;z-index:40;overflow:auto;-webkit-text-size-adjust:100%}
+.panel .pcaja{background:var(--cal);color:var(--tinta);border-radius:20px;padding:22px 20px;width:min(440px,100%);max-height:none;box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.panel h3{font-family:var(--ff-d);font-size:24px;margin:0 0 8px;line-height:1.15}
+.panel p{font-size:15px;line-height:1.45;color:var(--humo);margin:0 0 6px;max-width:none}
+.panel label{display:block;font-size:14px;font-weight:700;color:var(--humo);margin:14px 0 6px}
+.panel input{width:100%;padding:15px 14px;border:2px solid rgba(14,34,38,.18);border-radius:12px;background:#fff;font-family:var(--ff-b);font-size:17px;line-height:1.2}
+.panel input:focus{outline:none;border-color:var(--mar)}
+.panel .btn{display:block;width:100%;margin-top:12px;background:var(--mar);color:#fff;border-radius:14px;padding:16px;font-weight:800;font-size:17px}
+.panel .btn.sec{background:var(--cal);color:var(--tinta);border:2px solid rgba(14,34,38,.18)}
+.panel .cerrar{display:block;width:100%;margin-top:12px;font-size:15px;color:var(--humo);text-decoration:underline;padding:8px}
+.panel .err{color:var(--buganvilia);font-weight:700;font-size:15px;min-height:1em;margin-top:10px}
+</style>
+</head>
+<body>
+<div id="deck">
+<div class="rail"><i id="prog"></i></div>
+
+<section class="slide dark">
+ <div class="inner hero">
+  <div>
+   <p class="eyebrow anim">Universidad de San Buenaventura · Cartagena de Indias</p>
+   <h1 class="anim">Tecnología de la Información y la Comunicación</h1>
+   <p class="lead anim">Técnico Laboral en Recepción Hotelera</p>
+   <div class="datos anim"><span>26 de septiembre al 8 de octubre</span><span>48 horas</span><span>Andrés Jiménez Tuñón</span></div>
+   <p class="small anim" style="margin-top:22px">Avanza con la flecha derecha o desliza.</p>
+  </div>
+  <div class="llavero anim">
+   <svg viewBox="0 0 120 220" aria-hidden="true">
+    <line x1="60" y1="0" x2="60" y2="52" stroke="#8FD3D0" stroke-width="3"/>
+    <circle cx="60" cy="58" r="10" fill="none" stroke="#E8A33D" stroke-width="4"/>
+    <rect x="22" y="70" width="76" height="104" rx="12" fill="#E8A33D"/>
+    <text x="60" y="122" text-anchor="middle" font-family="Bricolage Grotesque,serif" font-size="34" font-weight="800" fill="#0A2E36">101</text>
+    <text x="60" y="150" text-anchor="middle" font-family="Manrope,sans-serif" font-size="13" font-weight="700" fill="#0A2E36">recepción</text>
+   </svg>
+  </div>
+ </div>
+</section>
+
+<section class="slide light">
+ <div class="inner">
+  <p class="eyebrow anim">Lunes, tu primer turno</p>
+  <h2 class="anim">Llega un huésped, el jefe pide la lista de llegadas y el contador quiere los pagos del día.</h2>
+  <p class="anim">¿Con qué resuelves las tres cosas antes del mediodía?</p>
+  <div class="opciones anim" id="op">
+   <button data-ok="0">Con buena memoria</button>
+   <button data-ok="0">Preguntándole a un compañero</button>
+   <button data-ok="1">Con las herramientas del hotel</button>
+  </div>
+  <div class="sello" id="sello">De eso se trata este módulo</div>
+ </div>
+</section>
+
+<section class="slide sand">
+ <div class="inner">
+  <p class="eyebrow anim">La competencia del módulo</p>
+  <h2 class="anim">Operar herramientas informáticas y digitales según protocolos y manuales técnicos</h2>
+  <div class="board stagger">
+   <button class="hook"><h3>Qué significa</h3><p>Usar bien los programas del trabajo: siguiendo el procedimiento, no inventando cada vez.</p><div class="pista">Tócalo</div><div class="reveal">Lo mismo, hecho igual, por cualquiera del equipo.</div></button>
+   <button class="hook"><h3>Cómo se ve en recepción</h3><p>Que un compañero continúe tu turno sin tener que llamarte.</p><div class="pista">Tócalo</div><div class="reveal">Tu archivo se encuentra, tu registro se entiende, tu caja cuadra.</div></button>
+   <button class="hook"><h3>Por qué pesa en la hoja de vida</h3><p>En Cartagena ya casi nadie contrata recepción sin manejo digital.</p><div class="pista">Tócalo</div><div class="reveal">Es la diferencia entre entrar de una o quedar en la lista de espera.</div></button>
+  </div>
+ </div>
+</section>
+
+<section class="slide light">
+ <div class="inner">
+  <p class="eyebrow anim">Unidad de aprendizaje</p>
+  <h2 class="anim">Diseñar la estructura de archivos digitales</h2>
+  <div class="arbol anim" style="margin-bottom:18px">
+   <span>📁 <b>Hotel 2026</b></span>
+   <span>&nbsp;&nbsp;📁 <b>10 Octubre</b></span>
+   <span>&nbsp;&nbsp;&nbsp;&nbsp;📁 Caja · 2026-10-03_cierre-caja_noche.xlsx</span>
+   <span>&nbsp;&nbsp;&nbsp;&nbsp;📁 Registro · 2026-10-03_registro-huespedes.xlsx</span>
+   <span>&nbsp;&nbsp;&nbsp;&nbsp;📁 Reservas · 2026-10-03_confirmacion_perez.pdf</span>
+  </div>
+  <div class="duo anim">
+   <div class="mal">cierre FINAL ok (2).xlsx</div>
+   <div class="bien">2026-10-03_cierre-caja_noche.xlsx</div>
+  </div>
+  <p class="small anim" style="margin-top:14px">Regla del curso: si otro no lo encuentra en diez segundos, está mal guardado.</p>
+ </div>
+</section>
+
+<section class="slide dark">
+ <div class="inner">
+  <p class="eyebrow anim">Los saberes</p>
+  <h2 class="anim">Cinco llaves que vas a recibir</h2>
+  <div class="board stagger">
+   <div class="hook"><h3>Herramientas</h3><p>Cuál sirve para qué y cuál no</p></div>
+   <div class="hook"><h3>Funciones avanzadas</h3><p>Lo que de verdad ahorra tiempo en un turno</p></div>
+   <div class="hook"><h3>Instalación y configuración</h3><p>Dejar el equipo listo para trabajar</p></div>
+   <div class="hook"><h3>Formatos</h3><p>DOCX, PDF, XLSX, CSV, JPG</p></div>
+   <div class="hook"><h3>Programación básica</h3><p>Fórmulas y una primera macro</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="slide light">
+ <div class="inner">
+  <p class="eyebrow anim">Los procedimientos</p>
+  <h2 class="anim">Lo que vas a saber hacer. Marca lo que ya manejas hoy.</h2>
+  <div class="checks stagger" id="checks">
+   <button class="check"><span class="caja">✓</span><span>Configurar y personalizar Word y Excel</span></button>
+   <button class="check"><span class="caja">✓</span><span>Organizar carpetas y nombrar archivos con un estándar</span></button>
+   <button class="check"><span class="caja">✓</span><span>Respaldar y trabajar en la nube sin perder nada</span></button>
+   <button class="check"><span class="caja">✓</span><span>Diseñar plantillas para no repetir trabajo</span></button>
+   <button class="check"><span class="caja">✓</span><span>Pasar datos de un sistema a Excel y de Excel a Word</span></button>
+   <button class="check"><span class="caja">✓</span><span>Trabajar con atajos de teclado</span></button>
+  </div>
+  <p class="small anim" style="margin-top:14px">Lo que quede sin marcar hoy es exactamente lo que vamos a trabajar.</p>
+ </div>
+</section>
+
+<section class="slide sand">
+ <div class="inner">
+  <p class="eyebrow anim">Las actitudes</p>
+  <h2 class="anim">Lo que se nota en un turno, aunque no esté en el examen</h2>
+  <div class="board stagger">
+   <div class="hook"><h3>Orden</h3><p>Cada cosa en su carpeta, todos los días</p></div>
+   <div class="hook"><h3>Curiosidad</h3><p>Probar antes de rendirse</p></div>
+   <div class="hook"><h3>Método</h3><p>Mismo proceso, mismo resultado</p></div>
+   <div class="hook"><h3>Compañerismo</h3><p>Enseñar lo que ya aprendiste</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="slide light">
+ <div class="inner">
+  <p class="eyebrow anim">Ruta del módulo</p>
+  <h2 class="anim">Ocho encuentros en dos semanas</h2>
+  <div class="agenda stagger" id="agenda">
+   <button class="fila"><span class="cuando">Sáb 26 sep</span><span><span class="que">Herramientas, formatos y organización</span><span class="det">Taller diagnóstico y práctica en sala de sistemas</span></span><span class="modo" style="grid-column:2">Presencial, 8:00 a 2:00</span></button>
+   <button class="fila v"><span class="cuando">Mar 29 sep</span><span><span class="que">Estructura de carpetas y nombres</span><span class="det">Cada uno arma su estructura en la nube</span></span><span class="modo" style="grid-column:2">Virtual, 7:00 a 9:00 p. m.</span></button>
+   <button class="fila v"><span class="cuando">Mié 30 sep</span><span><span class="que">Respaldo y datos del huésped</span><span class="det">Buenas prácticas y protección de datos</span></span><span class="modo" style="grid-column:2">Virtual, 7:00 a 9:00 p. m.</span></button>
+   <button class="fila v"><span class="cuando">Jue 1 oct</span><span><span class="que">Plantillas</span><span class="det">Tarjeta de registro y carta de confirmación</span></span><span class="modo" style="grid-column:2">Virtual, 7:00 a 9:00 p. m.</span></button>
+   <button class="fila"><span class="cuando">Sáb 3 oct</span><span><span class="que">Excel y atajos</span><span class="det">Filtros, fórmulas y simulación de un turno completo</span></span><span class="modo" style="grid-column:2">Presencial, 8:00 a 2:00</span></button>
+   <button class="fila v"><span class="cuando">Mar 6 oct</span><span><span class="que">Integrar herramientas</span><span class="det">De Excel a Word y formularios en línea</span></span><span class="modo" style="grid-column:2">Virtual, 7:00 a 9:00 p. m.</span></button>
+   <button class="fila v"><span class="cuando">Mié 7 oct</span><span><span class="que">Automatizar</span><span class="det">Primera macro y reporte que se arma solo</span></span><span class="modo" style="grid-column:2">Virtual, 7:00 a 9:00 p. m.</span></button>
+   <button class="fila v"><span class="cuando">Jue 8 oct</span><span><span class="que">Evaluación y cierre</span><span class="det">Entrega de evidencias y sustentación corta</span></span><span class="modo" style="grid-column:2">Virtual, 7:00 a 9:00 p. m.</span></button>
+  </div>
+  <p class="small anim" style="margin-top:12px">Toca una fecha para ver qué haremos ese día.</p>
+ </div>
+</section>
+
+<section class="slide dark">
+ <div class="inner">
+  <p class="eyebrow anim">Cómo trabajamos</p>
+  <h2 class="anim">Poco discurso. Mucho turno simulado.</h2>
+  <div class="board stagger">
+   <div class="hook"><h3>Problemas primero</h3><p>Cada tema entra por una situación del hotel, no por la definición</p></div>
+   <div class="hook"><h3>Juego de roles</h3><p>Te toca atender, resolver y responder por lo que hiciste</p></div>
+   <div class="hook"><h3>Simulación</h3><p>Practicamos en un entorno parecido al del trabajo real</p></div>
+   <div class="hook"><h3>Parejas</h3><p>Quien va adelante acompaña a quien va empezando</p></div>
+  </div>
+  <div class="cifras anim" style="margin-top:26px">
+   <div class="cifra"><b>24</b><span>horas de teoría</span></div>
+   <div class="cifra"><b>24</b><span>horas de práctica</span></div>
+   <div class="cifra"><b>0</b><span>exámenes sorpresa</span></div>
+  </div>
+ </div>
+</section>
+
+<section class="slide light">
+ <div class="inner">
+  <p class="eyebrow anim">Evaluación</p>
+  <h2 class="anim">Se evalúa lo que haces, no lo que memorizas</h2>
+  <div class="board stagger">
+   <div class="hook"><h3>Tus productos</h3><p>Los archivos y carpetas que entregas</p></div>
+   <div class="hook"><h3>Observación en clase</h3><p>Cómo trabajas en la sala y en el juego de roles</p></div>
+   <div class="hook"><h3>Sustentación corta</h3><p>Explicar con tus palabras lo que hiciste</p></div>
+   <div class="hook"><h3>Cuestionarios</h3><p>Preguntas con situaciones de recepción</p></div>
+   <div class="hook"><h3>Auto y coevaluación</h3><p>Rúbricas contigo y con tus compañeros</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="slide sand">
+ <div class="inner">
+  <p class="eyebrow anim">Tus evidencias</p>
+  <h2 class="anim">Lo que debes tener el 8 de octubre</h2>
+  <div class="checks stagger">
+   <div class="check"><span class="caja">✓</span><span>Tu carpeta digital organizada con el estándar del curso</span></div>
+   <div class="check"><span class="caja">✓</span><span>Tus plantillas: tarjeta de registro y carta de confirmación</span></div>
+   <div class="check"><span class="caja">✓</span><span>Los archivos de cada ejercicio, exportados y bien nombrados</span></div>
+   <div class="check"><span class="caja">✓</span><span>El resumen del texto del plan lector</span></div>
+  </div>
+  <p class="small anim" style="margin-top:16px">Se va armando clase a clase. Al final solo se entrega.</p>
+ </div>
+</section>
+
+<section class="slide light">
+ <div class="inner">
+  <p class="eyebrow anim">Nuestros acuerdos</p>
+  <h2 class="anim">Cuatro reglas para estas dos semanas</h2>
+  <div class="board stagger">
+   <button class="hook"><h3>Nadie se queda atrás</h3><p>Tócalo para ver cómo se aplica</p><div class="pista">Tócalo</div><div class="reveal">Si a uno le cuesta un tema, lo vemos todos.</div></button>
+   <button class="hook"><h3>Preguntar no da pena</h3><p>Tócalo para ver cómo se aplica</p><div class="pista">Tócalo</div><div class="reveal">La pregunta “boba” la tienen otros tres callados.</div></button>
+   <button class="hook"><h3>Se entrega a tiempo</h3><p>Tócalo para ver cómo se aplica</p><div class="pista">Tócalo</div><div class="reveal">Lo tarde se recibe, pero primero hablamos del porqué.</div></button>
+   <button class="hook"><h3>El celular es herramienta</h3><p>Tócalo para ver cómo se aplica</p><div class="pista">Tócalo</div><div class="reveal">Se usa cuando el ejercicio lo pide; el resto, boca abajo.</div></button>
+  </div>
+ </div>
+</section>
+
+<section class="slide dark">
+ <div class="inner">
+  <p class="eyebrow anim">El 8 de octubre</p>
+  <h2 class="anim" style="max-width:24ch">Vas a poder sentarte en cualquier recepción y entender el sistema que te pongan al frente</h2>
+  <div class="checks stagger" style="max-width:52ch">
+   <div class="check"><span class="caja">✓</span><span>Dejar tu turno documentado, sin que nadie te llame después</span></div>
+   <div class="check"><span class="caja">✓</span><span>Mandar el archivo correcto, en el formato correcto</span></div>
+   <div class="check"><span class="caja">✓</span><span>Resolver en Excel lo que hoy resuelves a mano</span></div>
+  </div>
+  <p class="lead anim" style="margin-top:26px;color:var(--mostaza)">Arrancamos ahora.</p>
+ </div>
+</section>
+
+<button class="fab" id="abrir">📱 Control remoto</button>
+<div class="dotp" id="puntero"></div>
+<div class="nav">
+ <button data-go="-1" aria-label="Diapositiva anterior">Atrás</button>
+ <button data-go="1" aria-label="Siguiente diapositiva">Siguiente</button>
+ <button id="fs" aria-label="Pantalla completa">Pantalla completa</button>
+ <span class="tag" id="tag">1 / 13</span>
+</div>
+</div>
+<div id="mando">
+ <div class="ahora"><small>En pantalla</small><b id="m-ahora">—</b></div>
+ <div class="ahora" style="background:rgba(251,246,238,.05)"><small>Sigue</small><b id="m-sigue" style="font-size:16px">—</b></div>
+ <div class="pad" id="pad">Desliza aquí para mover el puntero<br><span style="font-weight:500;font-size:13px">Levanta el dedo y el puntero se apaga</span></div>
+ <div class="fila2"><button class="sec" id="m-atras">Atrás</button><button id="m-sig">Siguiente</button></div>
+ <div class="cont"><span id="m-cont">—</span> · <button style="background:none;padding:6px;color:#9FC4C6;font-size:13px;text-decoration:underline" id="m-salir">Salir del control</button></div>
+</div>
+<script>
+(function(){
+ const slides=[...document.querySelectorAll('.slide')];let i=0;
+ function go(n){i=Math.max(0,Math.min(slides.length-1,n));
+  slides.forEach((s,k)=>{s.classList.toggle('on',k===i);if(k===i)s.scrollTop=0;});
+  document.getElementById('prog').style.width=((i+1)/slides.length*100)+'%';
+  document.getElementById('tag').textContent=(i+1)+' / '+slides.length;
+  window.dispatchEvent(new CustomEvent('deck:go',{detail:i}));}
+ document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(i+ +b.dataset.go));
+ document.addEventListener('keydown',e=>{
+  if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(i+1);}
+  if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(i-1);}
+  if(e.key==='Home')go(0);if(e.key==='End')go(slides.length-1);});
+ let x0=null,y0=null;
+ document.addEventListener('touchstart',e=>{x0=e.touches[0].clientX;y0=e.touches[0].clientY;},{passive:true});
+ document.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;
+  if(Math.abs(dx)>70&&Math.abs(dx)>Math.abs(dy))go(i+(dx<0?1:-1));x0=null;},{passive:true});
+ document.addEventListener('click',e=>{
+  const h=e.target.closest('.hook');if(h&&h.querySelector('.reveal'))h.classList.toggle('open');
+  const c=e.target.closest('.check');if(c&&c.tagName==='BUTTON')c.classList.toggle('hecho');
+  const f=e.target.closest('.fila');if(f)f.classList.toggle('abierta');
+  const o=e.target.closest('#op button');if(o){const box=document.getElementById('op');box.classList.add('resuelta');
+   [...box.children].forEach(b=>b.classList.toggle('buena',b.dataset.ok==='1'));
+   document.getElementById('sello').classList.add('puesto');}});
+ document.getElementById('fs').onclick=()=>{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen().catch(()=>{});};
+ go(0);
+ window.deckGo=go;
+})();
+
+/* ---------- Control remoto por Firebase ---------- */
+(function(){
+ const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyDF2asULlXoNiRFhGn-aqWjyNUBHBG_XhQ",
+  authDomain: "sanbuenaventurahostel.firebaseapp.com",
+  projectId: "sanbuenaventurahostel",
+  storageBucket: "sanbuenaventurahostel.firebasestorage.app",
+  messagingSenderId: "278880962197",
+  appId: "1:278880962197:web:17a03c1cef0b603a727d9c"
+};
+ const DOM='sbhb.app', DOC='deck';
+ const $=s=>document.querySelector(s);
+ const slides=[...document.querySelectorAll('.slide')];
+ const titulo=s=>{const h=s.querySelector('h1,h2');return h?h.textContent.trim():'Diapositiva';};
+ let fb=null,rol=null,ultima=0,idx=0;
+ const puntero=$('#puntero');
+ window.addEventListener('deck:go',e=>{idx=e.detail;if(rol==='control')pinta();if(rol==='pantalla')return;});
+ function pinta(){$('#m-ahora').textContent=titulo(slides[idx]);$('#m-sigue').textContent=slides[idx+1]?titulo(slides[idx+1]):'Fin de la presentación';$('#m-cont').textContent=(idx+1)+' de '+slides.length;}
+ async function conectar(user,pass){
+  const base='https://www.gstatic.com/firebasejs/10.12.2/';
+  const [A,AU,F]=await Promise.all([import(base+'firebase-app.js'),import(base+'firebase-auth.js'),import(base+'firebase-firestore.js')]);
+  const app=A.initializeApp(FIREBASE_CONFIG),auth=AU.getAuth(app),db=F.getFirestore(app);
+  await AU.signInWithEmailAndPassword(auth,user+'@'+DOM,pass);
+  fb={F,db,ref:F.doc(db,'control',DOC)};
+ }
+ function escuchar(){fb.F.onSnapshot(fb.ref,s=>{if(!s.exists())return;const d=s.data();
+   if(typeof d.slide==='number'&&d.slide!==idx)window.deckGo(d.slide);
+   if(d.pointer){puntero.classList.add('on');puntero.style.left=(d.px*100)+'%';puntero.style.top=(d.py*100)+'%';}
+   else puntero.classList.remove('on');});}
+ function enviar(o){if(!fb)return;const ahora=Date.now();if(o.px!=null&&ahora-ultima<110)return;ultima=ahora;
+   fb.F.setDoc(fb.ref,Object.assign({ts:ahora},o),{merge:true}).catch(()=>{});}
+ function abrirPanel(){
+  const d=document.createElement('div');d.className='panel';
+  d.innerHTML=`<div class="pcaja"><h3>Control remoto</h3><p>Entra con el mismo usuario en el computador y en el celular. El celular manda, el computador obedece.</p>
+   <label>Usuario</label><input id="c-user" autocapitalize="none" value="admin">
+   <label>Contraseña</label><input id="c-pass" type="password">
+   <p class="err" id="c-err"></p>
+   <button class="btn" id="c-pantalla">Este equipo es la pantalla</button>
+   <button class="btn sec" id="c-mando">Este equipo es mi control</button>
+   <button class="cerrar" id="c-cerrar">Cancelar</button></div>`;
+  document.body.appendChild(d);
+  const cerrar=()=>d.remove();
+  d.querySelector('#c-cerrar').onclick=cerrar;
+  const entrar=async modo=>{
+   const u=d.querySelector('#c-user').value.trim().toLowerCase(),p=d.querySelector('#c-pass').value;
+   const err=d.querySelector('#c-err');err.textContent='Conectando…';
+   if(!FIREBASE_CONFIG.apiKey){err.textContent='Falta pegar los datos de Firebase en este archivo.';return;}
+   try{await conectar(u,p);}catch(e){err.textContent=(e&&e.code==='auth/invalid-credential')?'Usuario o contraseña incorrectos.':'No se pudo conectar ('+((e&&e.code)||'error')+').';return;}
+   rol=modo;cerrar();$('#abrir').style.display='none';
+   if(modo==='pantalla'){escuchar();}
+   else{$('#mando').classList.add('on');pinta();enviar({slide:idx,pointer:false});}
+  };
+  d.querySelector('#c-pantalla').onclick=()=>entrar('pantalla');
+  d.querySelector('#c-mando').onclick=()=>entrar('control');
+ }
+ $('#abrir').onclick=abrirPanel;
+ $('#m-sig').onclick=()=>{idx=Math.min(slides.length-1,idx+1);pinta();enviar({slide:idx});};
+ $('#m-atras').onclick=()=>{idx=Math.max(0,idx-1);pinta();enviar({slide:idx});};
+ $('#m-salir').onclick=()=>{$('#mando').classList.remove('on');$('#abrir').style.display='';rol=null;enviar({pointer:false});};
+ const pad=$('#pad');
+ const mover=e=>{const t=e.touches?e.touches[0]:e,r=pad.getBoundingClientRect();
+  const px=Math.min(1,Math.max(0,(t.clientX-r.left)/r.width)),py=Math.min(1,Math.max(0,(t.clientY-r.top)/r.height));
+  enviar({px,py,pointer:true});};
+ pad.addEventListener('touchstart',e=>{e.preventDefault();pad.classList.add('activo');mover(e);},{passive:false});
+ pad.addEventListener('touchmove',e=>{e.preventDefault();mover(e);},{passive:false});
+ pad.addEventListener('touchend',()=>{pad.classList.remove('activo');enviar({pointer:false});});
+ pad.addEventListener('mousedown',e=>{pad.classList.add('activo');mover(e);
+  const mv=ev=>mover(ev),up=()=>{pad.classList.remove('activo');enviar({pointer:false});document.removeEventListener('mousemove',mv);document.removeEventListener('mouseup',up);};
+  document.addEventListener('mousemove',mv);document.addEventListener('mouseup',up);});
+})();
+
+</script>
+</body>
+</html>
